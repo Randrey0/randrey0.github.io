@@ -1,0 +1,405 @@
+/* Mengatur gaya default */
+body {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Menyesuaikan padding konten untuk menghindari tumpang tindih dengan navbar tetap */
+.content {
+  padding-top: 100px; /* Sesuaikan dengan tinggi navbar Anda */
+}
+
+/* Gaya untuk header tetap */
+header {
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  background-image: linear-gradient(180deg, #333, rgb(255, 255, 255));
+  color: #000000;
+  z-index: 1000;
+  top: 0;
+  transition: top 0.5s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  margin: 0;
+  padding: 20px 0;
+  font-size: 24px;
+}
+
+header p {
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+header nav ul li {
+  margin: 0 15px;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Gaya untuk link aktif */
+nav ul li a.active {
+  font-weight: bold;
+  color: #12afa0;
+}
+
+/* Gaya untuk link aktif dan tidak terkena hover */
+nav ul li a.active:hover,
+nav ul li a.active:not(:hover) {
+  color: #12afa0;
+}
+
+/* Gaya untuk link lainnya saat di-hover */
+nav ul li a:not(.active):hover {
+  color: #555;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+h2 {
+  border-bottom: 2px solid #333;
+  padding-bottom: 10px;
+}
+
+hr {
+  border-bottom: 2px solid #333;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 20px;
+}
+
+ul.a {
+  list-style: inside;
+  text-align: justify;
+}
+
+.progress-bar {
+  background: #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress {
+  background: linear-gradient(90deg, rgb(110, 110, 110), #333);
+  height: 20px;
+  width: 0;
+  transition: width 0.5s ease-in-out;
+}
+
+.profile-picture {
+  text-align: center;
+  margin-top: 150px;
+}
+
+.profile-picture img {
+  border: 4px solid #33333300;
+}
+
+footer {
+  text-align: center;
+  background-image: linear-gradient(360deg, #333, rgb(255, 255, 255));
+  color: #050505;
+  padding: 20px 0;
+}
+
+footer p {
+  margin: 0;
+}
+
+.social-icons a {
+  color: #333;
+  margin: 0 10px;
+  font-size: 30px;
+}
+
+.social-icons a:hover {
+  color: #555;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.certificates-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  justify-content: center;
+}
+
+.certificate {
+  position: relative;
+  cursor: pointer;
+}
+
+.certificate.big {
+  grid-column: span 2;
+}
+
+.certificate img {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.certificate img:hover {
+  transform: scale(1.05);
+}
+
+.fullscreen-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.fullscreen-overlay img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.data-diri {
+  display: table;
+  width: 100%;
+}
+
+.data-diri div {
+  display: table-row;
+}
+
+.data-diri strong,
+.data-diri span,
+.data-diri p {
+  display: table-cell;
+  padding: 5px 10px;
+}
+
+.data-diri strong {
+  width: 200px;
+}
+
+.data-diri span {
+  width: 10px;
+}
+
+/* Media Queries untuk Responsivitas */
+@media (max-width: 768px) {
+  header {
+    position: static;
+  }
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+  header nav ul li {
+    margin: 10px 0;
+  }
+  .container {
+    width: 95%;
+  }
+  .certificates-container {
+    grid-template-columns: 1fr;
+  }
+  .certificate.big {
+    grid-column: span 1;
+  }
+  .profile-picture {
+    margin-top: 20px;
+  }
+  .progress-bar {
+    height: 15px;
+  }
+  .data-diri div {
+    display: block;
+  }
+  .data-diri strong,
+  .data-diri span,
+  .data-diri p {
+    display: block;
+    padding: 5px 0;
+  }
+}
+
+/* Gaya untuk peta */
+
+/* Media queries untuk tampilan mobile */
+@media (max-width: 768px) {
+  header nav ul {
+    flex-direction: column;
+  }
+
+  .skills-container {
+    flex-direction: column;
+  }
+
+  .data-diri div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .certificates-container {
+    grid-template-columns: 1fr; /* Ubah menjadi satu kolom */
+    justify-items: center;
+  }
+
+  .certificate {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+.projects-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.project {
+  cursor: pointer;
+  border: 1px solid #dddddd00;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  width: 500px;
+}
+
+.project-description {
+  text-align: justify;
+}
+
+.project-thumbnail {
+  width: 100%; /* Ukuran gambar proyek */
+  height: auto;
+  border: 2px solid #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.project-thumbnail:hover {
+  transform: scale(1.05);
+}
+
+/* Gaya untuk Modal */
+.modal {
+  display: none; /* Modal disembunyikan secara default */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 800px;
+  text-align: center;
+}
+
+.modal-content img {
+  width: 100%;
+  height: auto;
+}
+
+.modal-content .navigation-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.modal-content .prev-button {
+  left: 10px;
+}
+
+.modal-content .next-button {
+  right: 10px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Gaya untuk tombol link GitHub */
+.github-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.github-link:hover {
+  background-color: #555;
+}
+
+.logo-code {
+  padding-bottom: 10px;
+}
