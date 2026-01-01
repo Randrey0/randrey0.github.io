@@ -164,6 +164,31 @@
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+    <!-- Chatbot Wrapper -->
+    <div id="chatbot-wrapper">
+      <button id="chatbot-btn">
+        <i class="bi bi-chat-dots"></i>
+      </button>
+
+      <div id="chatbot-box">
+        <div class="chat-header">Chat Assistant</div>
+        <div class="chat-body" id="chat-body">
+          <div class="bot">Halo 👋 Ada yang bisa saya bantu?</div>
+        </div>
+
+        <div class="quick-chat" id="quick-chat">
+          <button class="quick-btn">👋 Siapa kamu?</button>
+          <button class="quick-btn">💼 Skill kamu apa?</button>
+          <button class="quick-btn">📊 Pengalaman & Project</button>
+          <button class="quick-btn">📞 Kontak</button>
+        </div>
+
+        <div class="chat-input">
+          <input type="text" id="chat-input" placeholder="Tulis pesan..." />
+        </div>
+      </div>
+    </div>
+
     <!-- Preloader -->
     <div id="preloader"></div>
 
@@ -181,6 +206,164 @@
 
     <!-- Main JS File -->
     <script src="assets/js/main.js"></script>
+
+    <script>
+      const chatbotBtn = document.getElementById("chatbot-btn");
+      const chatbotBox = document.getElementById("chatbot-box");
+      const chatbotWrapper = document.getElementById("chatbot-wrapper");
+      const scrollTopBtn = document.getElementById("scroll-top");
+
+      const input = document.getElementById("chat-input");
+      const body = document.getElementById("chat-body");
+      const quickChat = document.getElementById("quick-chat");
+
+      // Toggle chatbot
+      chatbotBtn.addEventListener("click", () => {
+        chatbotBox.classList.toggle("active");
+        quickChat.style.display = "flex";
+      });
+
+      window.addEventListener("scroll", () => {
+        chatbotWrapper.classList.toggle("shift-up", scrollTopBtn.classList.contains("active"));
+      });
+
+      // === SEND MESSAGE (USER) ===
+      function sendMessage(text) {
+        body.innerHTML += `<div class="user">${text}</div>`;
+        body.scrollTop = body.scrollHeight;
+      }
+
+      function animateQuickToChatPrecise(btn, text) {
+        // 1. Buat bubble user sementara (invisible)
+        const tempBubble = document.createElement("div");
+        tempBubble.className = "user temp";
+        tempBubble.textContent = text;
+        body.appendChild(tempBubble);
+
+        body.scrollTop = body.scrollHeight;
+
+        // 2. Ambil posisi target bubble
+        const targetRect = tempBubble.getBoundingClientRect();
+        const btnRect = btn.getBoundingClientRect();
+
+        // 3. Buat elemen animasi
+        const fly = document.createElement("div");
+        fly.className = "fly-message";
+        fly.textContent = text;
+
+        fly.style.left = btnRect.left + "px";
+        fly.style.top = btnRect.top + "px";
+
+        document.body.appendChild(fly);
+
+        // 4. Trigger animasi ke posisi bubble
+        requestAnimationFrame(() => {
+          fly.style.transform = `translate(
+      ${targetRect.left - btnRect.left}px,
+      ${targetRect.top - btnRect.top}px
+    )`;
+          fly.style.opacity = "0";
+        });
+
+        // 5. Cleanup & tampilkan bubble asli
+        setTimeout(() => {
+          fly.remove();
+          tempBubble.classList.remove("temp");
+        }, 450);
+      }
+
+      // === BOT REPLY (LOGIC LAMA KAMU) ===
+      function getBotReply(userMsg) {
+        const msg = userMsg.toLowerCase();
+        let botReply = "";
+
+        // === INTENT: SIAPA KAMU PROFIL ===
+        if (msg.includes("siapa") || msg.includes("siapa kamu") || msg.includes("kamu siapa") || msg.includes("ini siapa") || msg.includes("profil") || msg.includes("tentang anda") || msg.includes("about")) {
+          botReply =
+            "Saya adalah Ramadhan Andreyanto, mahasiswa Sistem Informasi dengan pengalaman magang di PERUMDAM sebagai admin pengelola data 😊 \n\n" +
+            "Saya tertarik di bidang System Analyst, Web Development, serta pengolahan data seperti Data Analyst dan Data Entry.";
+        }
+
+        // === INTENT: SKILL ===
+        else if (msg.includes("skill") || msg.includes("keahlian") || msg.includes("bisa apa") || msg.includes("kemampuan")) {
+          botReply =
+            "Beberapa skill yang saya miliki antara lain:\n" +
+            "• Web Development (HTML, CSS, JavaScript)\n" +
+            "• Backend menggunakan CodeIgniter 3 & PHP\n" +
+            "• Database MySQL\n" +
+            "• Microsoft (Word, Excel, Power Point) & Canva\n" +
+            "• Administrasi & pengelolaan data\n" +
+            "• Data entry dan pengolahan data dasar\n\n" +
+            "Saya juga memiliki ketertarikan untuk berkembang di bidang Data Analyst 📊";
+        }
+
+        // === INTENT: PENGALAMAN ===
+        else if (msg.includes("pengalaman") || msg.includes("kerja") || msg.includes("project") || msg.includes("magang") || msg.includes("portofolio") || msg.includes("experience")) {
+          botReply =
+            "Saya memiliki pengalaman magang di PERUMDAM, dengan peran sebagai admin yang bertugas mengelola dan memproses data pelanggan.\n\n" +
+            "Selain itu, saya juga mengerjakan beberapa project website seperti:\n" +
+            "• Sistem kasir & sistem informasi berbasis web\n" +
+            "• Portal berita menggunakan CodeIgniter 3\n" +
+            "• Website portofolio pribadi\n\n" +
+            "Pengalaman tersebut membuat saya terbiasa bekerja dengan data secara rapi dan terstruktur.";
+        }
+
+        // === INTENT: DATA ===
+        else if (msg.includes("data analyst") || msg.includes("data analysis") || msg.includes("data entry") || msg.includes("olah data")) {
+          botReply = "Saya memiliki ketertarikan di bidang Data Analyst dan Data Entry 📊\n" + "Saya terbiasa melakukan input, validasi, dan pengolahan data, serta tertarik untuk mengembangkan kemampuan analisis data lebih lanjut.";
+        }
+
+        // === INTENT: KONTAK ===
+        else if (msg.includes("kontak") || msg.includes("hubungi") || msg.includes("nomor") || msg.includes("wa")) {
+          botReply = "Kamu bisa menghubungi saya melalui WhatsApp di 0822-1332-6905 📞";
+        }
+
+        // === INTENT: TERIMA KASIH ===
+        else if (msg.includes("terima kasih") || msg.includes("thanks") || msg.includes("thx") || msg.includes("makasih")) {
+          botReply = "Sama-sama 😊 Senang bisa membantu!";
+        }
+
+        // === DEFAULT ===
+        else {
+          botReply = "Maaf, saya belum memahami pertanyaan tersebut.\nSilahkan hubungi langsung di 0822-1332-6905 ya 🙂";
+        }
+
+        setTimeout(() => {
+          body.innerHTML += `<div class="bot">${botReply}</div>`;
+          body.scrollTop = body.scrollHeight;
+        }, 400);
+      }
+
+      // === INPUT MANUAL ===
+      input.addEventListener("keypress", function (e) {
+        if (e.key === "Enter" && this.value.trim() !== "") {
+          const text = this.value;
+          this.value = "";
+
+          sendMessage(text);
+          getBotReply(text);
+
+          // ❌ JANGAN ADA KODE QUICK CHAT DI SINI
+        }
+      });
+
+      // === QUICK CHAT BUTTON ===
+      document.querySelectorAll(".quick-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const text = btn.textContent;
+
+          animateQuickToChatPrecise(btn, text);
+
+          setTimeout(() => {
+            getBotReply(text);
+          }, 500);
+
+          // hanya tombol ini yang hilang
+          btn.classList.add("hide");
+          setTimeout(() => btn.remove(), 250);
+        });
+      });
+    </script>
 
     <script>
       const container = document.querySelector(".profile-3d");
