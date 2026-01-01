@@ -25,6 +25,7 @@
   --accent-color: #1a59ce; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+  --accent-glass: color-mix(in srgb, var(--accent-color) 25%, transparent);
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
@@ -1291,4 +1292,211 @@ section,
 --------------------------------------------------------------*/
 .starter-section {
   /* Add your styles here */
+}
+
+/* === CHATBOT WRAPPER === */
+#chatbot-wrapper {
+  position: fixed;
+  right: 15px;
+  bottom: 20px;
+  z-index: 9999;
+  transition: bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#chatbot-wrapper.shift-up {
+  bottom: 85px;
+}
+
+/* === CHATBOT BUTTON === */
+#chatbot-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+
+  background: var(--accent-color);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#chatbot-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+/* === CHATBOT BOX === */
+#chatbot-box {
+  position: absolute;
+  bottom: 75px;
+  right: 0;
+  width: 310px;
+
+  background: color-mix(in srgb, var(--accent-color) 18%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--accent-color) 35%, transparent);
+
+  display: none;
+  overflow: hidden;
+
+  box-shadow: 0 28px 60px color-mix(in srgb, var(--accent-color) 35%, transparent), inset 0 0 1px rgba(255, 255, 255, 0.45);
+
+  animation: iosFadeUp 0.35s ease;
+}
+
+#chatbot-box.active {
+  display: block;
+}
+
+@keyframes iosFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.chat-header {
+  padding: 12px 14px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+
+  background: color-mix(in srgb, var(--accent-color) 28%, transparent);
+  color: #fff;
+
+  border-bottom: 1px solid color-mix(in srgb, var(--accent-color) 40%, transparent);
+}
+
+.chat-body {
+  height: 220px;
+  padding: 12px;
+  overflow-y: auto;
+  font-size: 14px;
+  color: #eaeaea;
+  flex-direction: column;
+  gap: 10px;
+  line-height: 1.5;
+  max-height: 320px;
+}
+
+.chat-body .bot {
+  background: color-mix(in srgb, var(--accent-color) 22%, transparent);
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  max-width: 85%;
+
+  align-self: flex-start;
+  white-space: pre-line;
+}
+
+.chat-body .user {
+  background: color-mix(in srgb, var(--accent-color) 45%, transparent);
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  margin-left: auto;
+  max-width: 85%;
+  text-align: right;
+}
+
+.chat-input {
+  padding: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.chat-input input {
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+
+  background: color-mix(in srgb, var(--accent-color) 20%, transparent);
+  backdrop-filter: blur(10px);
+  color: #fff;
+
+  font-size: 13px;
+}
+
+.chat-input input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.quick-chat {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 10px;
+
+  transform: translateY(12px);
+  opacity: 0;
+  pointer-events: none;
+
+  transition: all 0.3s ease;
+}
+
+#chatbot-box.active .quick-chat {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.quick-btn {
+  background: color-mix(in srgb, var(--accent-color) 35%, transparent);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 6px 12px;
+
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.quick-btn:hover {
+  background: color-mix(in srgb, var(--accent-color) 55%, transparent);
+  transform: scale(1.05);
+}
+
+.quick-btn.hide {
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+}
+
+.fly-message {
+  position: fixed;
+  z-index: 99999;
+
+  padding: 6px 12px;
+  border-radius: 14px;
+
+  background: color-mix(in srgb, var(--accent-color) 45%, transparent);
+  color: #fff;
+  font-size: 12px;
+  white-space: nowrap;
+
+  pointer-events: none;
+
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s ease;
+}
+
+.user.temp {
+  opacity: 0;
 }
