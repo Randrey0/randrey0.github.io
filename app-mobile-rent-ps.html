@@ -41,9 +41,8 @@
   <body class="portfolio-details-page">
     <header id="header" class="header dark-background d-flex flex-column">
       <i class="header-toggle d-xl-none bi bi-list"></i>
-
-      <div class="profile-img">
-        <img src="assets/img/pp.png" alt="" class="img-fluid rounded-circle" />
+      <div class="profile-3d">
+        <img src="assets/img/pp.png" alt="Profile" class="profile-photo img-fluid rounded-circle" />
       </div>
 
       <a href="index.html" class="logo d-flex align-items-center justify-content-center">
@@ -237,6 +236,43 @@
     <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <script>
+      const container = document.querySelector(".profile-3d");
+      const image = document.querySelector(".profile-photo");
+
+      container.addEventListener("mousemove", (e) => {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        // dibatasi supaya tidak berlebihan
+        const rotateX = -(y - centerY) / 10;
+        const rotateY = (x - centerX) / 10;
+
+        image.style.transform = `
+      perspective(1000px)
+      rotateX(${rotateX}deg)
+      rotateY(${rotateY}deg)
+    `;
+
+        image.style.boxShadow = `
+      ${-rotateY * 2}px ${rotateX * 2}px 30px rgba(0,0,0,0.25)
+    `;
+      });
+
+      container.addEventListener("mouseleave", () => {
+        image.style.transform = `
+      perspective(1000px)
+      rotateX(0deg)
+      rotateY(0deg)
+    `;
+        image.style.boxShadow = `0 10px 25px rgba(0,0,0,0.15)`;
+      });
+    </script>
 
     <!-- Main JS File -->
     <script src="assets/js/main.js"></script>
