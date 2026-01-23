@@ -496,7 +496,7 @@
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
           <h2>Contact</h2>
-          <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+          <p>Feel free to reach out for professional inquiries, collaboration opportunities, or further discussion. I am always open to connecting and exchanging ideas</p>
         </div>
         <!-- End Section Title -->
 
@@ -544,22 +544,46 @@
 
             <div class="col-lg-7">
    <form id="contact-form" action="mailto:ramadhanandre95@gmail.com" method="post" enctype="text/plain">
-          <label for="name">Nama:</label><br />
+          <label for="name">Name:</label><br />
           <input type="text" id="name" name="name" style="width: 100%; padding: 8px " required /><br /><br />
 
           <label for="email">Email:</label><br />
           <input type="email" id="email" name="email" style="width: 100%; padding: 8px" required /><br /><br />
 
-          <label for="telephone">No Telepon:</label><br />
+          <label for="telephone">Contact Number:</label><br />
           <input type="text" id="telephone" name="telephone" style="width: 100%; padding: 8px" required /><br /><br />
 
-          <label for="subject">Subjek:</label><br />
+          <label for="subject">Subject:</label><br />
           <input type="text" id="subject" name="subject" style="width: 100%; padding: 8px" required /><br /><br />
 
-          <label for="message">Pesan:</label><br />
+          <label for="message">Message:</label><br />
           <textarea id="message" name="message" style="width: 100%; height: 150px; padding: 8px" required></textarea><br /><br />
 
-          <input type="submit" value="Kirim Email" style="padding: 10px 20px; background: var(--accent-color); color: white; border: none; cursor: pointer" />
+         <input 
+  type="submit" 
+  value="Send an Email"
+  style="
+    padding: 12px 28px;
+    background: var(--accent-color);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  "
+  onmouseover="
+    this.style.transform='translateY(2px)';
+    this.style.boxShadow='inset 0 4px 10px rgba(0,0,0,0.25)';
+  "
+  onmouseout="
+    this.style.transform='translateY(0)';
+    this.style.boxShadow='0 8px 20px rgba(0,0,0,0.18)';
+  "
+/>
+
         </form>
             </div>
             <!-- End Contact Form -->
